@@ -1,16 +1,30 @@
-name: Eleventy Build
-on: [push]
+name: Deploy to from Source Master
+on:
+  push:	
+    branches:	
+      - source
 
 jobs:
-  build_deploy:
-    runs-on: ubuntu-18.04
+  deploy:
+    name: Checkout and Build
+    runs-on: ubuntu-latest    
     steps:
-      - uses: actions/checkout@master
-      - name: Build
-        uses: TartanLlama/actions-eleventy@v1.1
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v1.1.0
-        env:
-          PUBLISH_DIR: _site 
-          PUBLISH_BRANCH: gh-pages
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v2
+      with:
+        ref: 'master'
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: npm install and build
+      run: |
+        npm install
+        npx @11ty/eleventy
+
+    - name: Deploy to Master
+      uses: s0/git-publish-subdir-action@master
+      env:
+        REPO: self
+        BRANCH: gh-pages
+        FOLDER: _site
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
