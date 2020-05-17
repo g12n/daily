@@ -37,20 +37,23 @@
     justify-content: center;
     grid-column: span 3;
     grid-row: span 3;
-    font-weight: 800;
+    font-weight: 400;
   }
   
   .arvelie .y{
     grid-area: 1/1/4/4;
-    font-size: 1.5em;
+    font-size: 3em;
+    font-weight: 200;
   }
   .arvelie .m{
     grid-area: 3/3/6/6;
-    font-size: 1.5em;
+    font-size: 3em;
+    font-weight: 200;
   }
   .arvelie .d{
     grid-area: 5/5/8/8;
-    font-size: 1.5em;
+    font-size: 3em;
+    font-weight: 200;
   }
   .a {
     transition: 1s; /* will be prefixed */
@@ -58,28 +61,23 @@
 
   .arvelie .day{
     grid-area: 5/1/6/3;
-    
-    font-weight: 100;
-    
   }
 
   .arvelie .dow{
     grid-area: 4/1/5/3;
     
-    font-weight: 100;
   }
 
   .arvelie .month{
     grid-area: 6/1/8/5;
-    font-weight: 100;
+    
   }
 
   .arvelie .sunset{
     grid-area: 2/4/3/6;
-    font-weight: 100;
+    
   }
   .arvelie .sunrise{
     grid-area: 1/4/2/6;
     font-size: 0.99em;
-    font-weight: 100;
   }

@@ -7,10 +7,7 @@ const zonedDate = utcToZonedTime(date, timeZone)
 let now = zonedDate;
 const Arvelie =  require('./lib/arvelie')
 let today =now.toArvelie()
-
-
 let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
-
 console.log(times)
 
 class Test {
@@ -42,10 +39,8 @@ class Test {
       <span class="month">${format(zonedDate,'MMMM')}</span>
       <span class="day">${format(zonedDate,'d')}</span>
       <span class="dow">${format(zonedDate,'EEEE')}</span>
-      <span class="sunrise">${format(times.sunrise,'H:m')}</span>
-      <span class="sunset">${format(times.sunset,'H:m')}</span>
-      
-      
+      <span class="sunrise">${format(utcToZonedTime(times.sunrise,timeZone),'HH:mm')}</span>
+      <span class="sunset">${format(utcToZonedTime(times.sunset,timeZone),'HH:mm')}</span>  
     </div>
 
     
