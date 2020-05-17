@@ -14,7 +14,7 @@
    body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: clamp(16px, calc(1rem + 0.5vw), 24px)
+    font-size: clamp(16px, calc(1rem + 0.2vw), 21px)
   }
   .arvelie{
     display: grid;
@@ -52,4 +52,22 @@
   }
   .a {
     transition: 1s; /* will be prefixed */
+  }
+
+  .arvelie .day{
+    grid-area: 5/1/6/3;
+    
+    font-weight: 100;
+    
+  }
+
+  .arvelie .dow{
+    grid-area: 4/1/5/3;
+    
+    font-weight: 100;
+  }
+
+  .arvelie .month{
+    grid-area: 6/1/8/5;
+    font-weight: 100;
   }
