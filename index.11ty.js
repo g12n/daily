@@ -41,6 +41,7 @@ class Test {
       <span class="d">${today.d}</span>
     </div>
     <div>${zonedDate}</div>
+    <div>${date}</div>
   </body>
 </html>`
   }
