@@ -1,15 +1,17 @@
 const { zonedTimeToUtc, utcToZonedTime, format } = require('date-fns-tz')
+var SunCalc = require('suncalc');
 
 const date = new Date()
 const timeZone = 'Europe/Berlin'
 const zonedDate = utcToZonedTime(date, timeZone)
 let now = zonedDate;
-
 const Arvelie =  require('./lib/arvelie')
 let today =now.toArvelie()
 
 
+let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
 
+console.log(times)
 
 class Test {
   // or `async data() {`
@@ -40,6 +42,10 @@ class Test {
       <span class="month">${format(zonedDate,'MMMM')}</span>
       <span class="day">${format(zonedDate,'d')}</span>
       <span class="dow">${format(zonedDate,'EEEE')}</span>
+      <span class="sunrise">${format(times.sunrise,'H:m')}</span>
+      <span class="sunset">${format(times.sunset,'H:m')}</span>
+      
+      
     </div>
 
     
