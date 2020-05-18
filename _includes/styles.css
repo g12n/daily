@@ -1,22 +1,11 @@
-
-::placeholder {
-    color: gray;
-  }
-  
-  .image {
-    background-image: url(image@1x.png);
-  }
-  @media (min-resolution: 2dppx) {
-    .image {
-      background-image: url(image@2x.png);
-    }
-  }
-   body {
+body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: mas(14px, calc(1rem + 0.8vmin))
-  }
-  .arvelie{
+    font-size: max(14px, calc(0rem + 3vmin));
+    background: hsl(280 20% 10%)
+}
+
+.arvelie{
     display: grid;
     grid-gap: 10px;
     padding: 10px;
@@ -28,56 +17,44 @@
     grid-template-rows: repeat(7,1fr);
     grid-template-columns: repeat(7,1fr);
     box-sizing: border-box;
-    background: #fff;
-  }
-  .arvelie span{
-    background: #ddd;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    grid-column: span 3;
-    grid-row: span 3;
-    font-weight: 400;
-  }
-  
-  .arvelie .y{
-    grid-area: 1/1/4/4;
-    font-size: 3em;
-    font-weight: 200;
-  }
-  .arvelie .m{
-    grid-area: 3/3/6/6;
-    font-size: 3em;
-    font-weight: 200;
-  }
-  .arvelie .d{
-    grid-area: 5/5/8/8;
-    font-size: 3em;
-    font-weight: 200;
-  }
-  .a {
-    transition: 1s; /* will be prefixed */
   }
 
-  .arvelie .day{
-    grid-area: 5/1/6/3;
-  }
+.arvelie span{
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border-radius: 2vmin;
+  background-color: hsl(220deg 40% 40% / 0.8);
+  color: #fff; 
+}
 
-  .arvelie .dow{
-    grid-area: 4/1/5/3;
-    
-  }
 
-  .arvelie .month{
-    grid-area: 6/1/8/5;
-    
-  }
+.y, .m, .d {
+  font-size: 2em;
+  font-weight: 100;
+  background-color: beige;
+}
+.y { grid-area: 1/1/4/4 }
+.m { grid-area: 3/3/6/6 }
+.d { grid-area: 5/5/8/8 }
 
-  .arvelie .sunset{
-    grid-area: 2/4/3/6;
-    
-  }
-  .arvelie .sunrise{
-    grid-area: 1/4/2/6;
-    font-size: 0.99em;
-  }
+.day { grid-area: 5/1/6/3 }
+.dow { grid-area: 4/1/5/3 }
+.month{ grid-area: 6/1/8/5 }
+
+.sunset{ grid-area: 2/4/3/6 }
+.sunrise{ grid-area: 1/4/2/6;}
+
+.moonset{ grid-area: 4/6/5/8 }
+.moonrise{grid-area: 3/6/4/8}
+.moon-info{grid-area: 3/6/4/8}
+
+.moon-svg{
+  grid-area:1/6/3/8
+}
+.moon-light{ 
+  fill: #fff;
+}
+.moon-shadow{ 
+  fill: hsl(220deg 40% 40% / 0.8);
+}

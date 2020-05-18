@@ -1,14 +1,50 @@
 const { zonedTimeToUtc, utcToZonedTime, format } = require('date-fns-tz')
-var SunCalc = require('suncalc');
+const Arvelie =  require('./lib/arvelie')
+const SunCalc = require('suncalc');
 
 const date = new Date()
 const timeZone = 'Europe/Berlin'
 const zonedDate = utcToZonedTime(date, timeZone)
-let now = zonedDate;
-const Arvelie =  require('./lib/arvelie')
-let today =now.toArvelie()
+
+const moonPath =  require('./lib/moonpath')
+
+console.log(moonPath())
+
+let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
+<span class="day">${format(zonedDate,'d')}</span>
+<span class="dow">${format(zonedDate,'EEEE')}</span>`
+
+let today =zonedDate.toArvelie()
+let arvelieDate = `<span class="y">${today.y}</span>
+<span class="m">${today.m}</span>
+<span class="d">${today.d}</span>`
+
+
 let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
-console.log(times)
+let sunBlock = `<span class="sunrise">${format(utcToZonedTime(times.sunrise,timeZone),'HH:mm')}</span>
+<span class="sunset">${format(utcToZonedTime(times.sunset,timeZone),'HH:mm')}</span>`
+
+let moonTimes =  SunCalc.getMoonTimes(zonedDate, 50.935173, 6.953101);
+let moonBlock = ``
+
+if (moonTimes.alwaysDown === true){
+  moonBlock += `<span class="moon-info">always down</span>`
+} else if (moonTimes.alwaysUp === true){
+  moonBlock += `<span class="moon-info">always up</span>`
+} else {
+  moonBlock += `<span class="moonrise">${format(utcToZonedTime(moonTimes.rise,timeZone),'HH:mm')}</span>`
+  moonBlock += `<span class="moonset">${format(utcToZonedTime(moonTimes.set,timeZone),'HH:mm')}</span>`
+}
+
+let moonSVG = `<svg class="moon-svg" viewBox="0 0  600 600">`
+
+let {fraction, phase} = SunCalc.getMoonIllumination(zonedDate)
+let {parallacticAngle}= SunCalc.getMoonPosition(zonedDate,50.935173, 6.953101)
+
+moonSVG +=`<circle class="moon-shadow" cx="300" cy="300" r="300"/>`
+moonSVG +=`<path class="moon-light" d="${moonPath(fraction,phase,parallacticAngle,300, [300,300])}" />`
+
+moonSVG +=`</svg>`
 
 class Test {
   // or `async data() {`
@@ -33,17 +69,13 @@ class Test {
   </head>
   <body>
     <div class="arvelie">
-      <span class="y">${today.y}</span>
-      <span class="m">${today.m}</span>
-      <span class="d">${today.d}</span>
-      <span class="month">${format(zonedDate,'MMMM')}</span>
-      <span class="day">${format(zonedDate,'d')}</span>
-      <span class="dow">${format(zonedDate,'EEEE')}</span>
-      <span class="sunrise">${format(utcToZonedTime(times.sunrise,timeZone),'HH:mm')}</span>
-      <span class="sunset">${format(utcToZonedTime(times.sunset,timeZone),'HH:mm')}</span>  
-    </div>
-
+      ${arvelieDate}
+      ${calendarDate}
+      ${sunBlock}
+      ${moonBlock}
+      ${moonSVG}
     
+    </div>
   </body>
 </html>`
   }
