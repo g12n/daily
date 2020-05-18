@@ -36,7 +36,7 @@ if (moonTimes.alwaysDown === true){
   moonBlock += `<span class="moonset">${format(utcToZonedTime(moonTimes.set,timeZone),'HH:mm')}</span>`
 }
 
-let moonSVG = `<svg class="moon-svg" viewBox="0 0  600 600">`
+let moonSVG = `<div class="moon-svg"><svg viewBox="0 0  600 600">`
 
 let {fraction, phase} = SunCalc.getMoonIllumination(zonedDate)
 let {parallacticAngle}= SunCalc.getMoonPosition(zonedDate,50.935173, 6.953101)
@@ -44,7 +44,7 @@ let {parallacticAngle}= SunCalc.getMoonPosition(zonedDate,50.935173, 6.953101)
 moonSVG +=`<circle class="moon-shadow" cx="300" cy="300" r="300"/>`
 moonSVG +=`<path class="moon-light" d="${moonPath(fraction,phase,parallacticAngle,300, [300,300])}" />`
 
-moonSVG +=`</svg>`
+moonSVG +=`</svg></div>`
 
 class Test {
   // or `async data() {`
