@@ -19,21 +19,20 @@ let arvelieDate = `<span class="y">${today.y}</span>
 <span class="m">${today.m}</span>
 <span class="d">${today.d}</span>`
 
-
 let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
 let sunBlock = `<span class="sunrise">${format(utcToZonedTime(times.sunrise,timeZone),'HH:mm')}</span>
 <span class="sunset">${format(utcToZonedTime(times.sunset,timeZone),'HH:mm')}</span>`
 
-let moonTimes =  SunCalc.getMoonTimes(zonedDate, 50.935173, 6.953101);
+let {rise:moonrise, set:moonset, alwaysDown, alwaysUp } =  SunCalc.getMoonTimes(zonedDate, 50.935173, 6.953101);
 let moonBlock = ``
 
-if (moonTimes.alwaysDown === true){
+if (alwaysDown === true){
   moonBlock += `<span class="moon-info">always down</span>`
-} else if (moonTimes.alwaysUp === true){
+} else if (alwaysUp === true){
   moonBlock += `<span class="moon-info">always up</span>`
 } else {
-  moonBlock += `<span class="moonrise">${format(utcToZonedTime(moonTimes.rise,timeZone),'HH:mm')}</span>`
-  moonBlock += `<span class="moonset">${format(utcToZonedTime(moonTimes.set,timeZone),'HH:mm')}</span>`
+  moonBlock += `<span class="moonrise">${format(utcToZonedTime(moonrise,timeZone),'HH:mm')}</span>`
+  moonBlock += `<span class="moonset">${format(utcToZonedTime(moonset,timeZone),'HH:mm')}</span>`
 }
 
 let moonSVG = `<div class="moon-svg"><svg viewBox="0 0  600 600">`
@@ -45,6 +44,9 @@ moonSVG +=`<circle class="moon-shadow" cx="300" cy="300" r="300"/>`
 moonSVG +=`<path class="moon-light" d="${moonPath(fraction,phase,parallacticAngle,300, [300,300])}" />`
 
 moonSVG +=`</svg></div>`
+
+//const rtf = new Intl.RelativeTimeFormat('de');
+//rtf.format(-3.14, 'days')
 
 class Test {
   // or `async data() {`
@@ -65,7 +67,9 @@ class Test {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${today.toString()}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
+
   </head>
   <body>
     <div class="arvelie">
@@ -74,7 +78,6 @@ class Test {
       ${sunBlock}
       ${moonBlock}
       ${moonSVG}
-    
     </div>
   </body>
 </html>`

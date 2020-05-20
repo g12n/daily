@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: 'Quicksand', sans-serif;
     font-size: max(14px, calc(0rem + 3vmin));
     background: hsl(280 20% 10%)
 }
@@ -16,7 +17,7 @@ body {
     height: 100vmin;
     grid-template-rows: repeat(7,1fr);
     grid-template-columns: repeat(7,1fr);
-    box-sizing: border-box;
+    box-sizing: border-box
   }
 
 .arvelie span{
@@ -30,8 +31,8 @@ body {
 
 
 .y, .m, .d {
-  font-size: 2em;
-  font-weight: 100;
+  font-size: 6em;
+  font-weight: 300;
   background-color: beige;
 }
 .y { grid-area: 1/1/4/4 }
@@ -40,7 +41,12 @@ body {
 
 .day { grid-area: 5/1/6/3 }
 .dow { grid-area: 4/1/5/3 }
-.month{ grid-area: 6/1/8/5 }
+.month{ grid-area: 6/1/8/5 ; 
+  font-weight: 500;
+  font-size: 3em; 
+  letter-spacing: 0.05em; 
+  text-transform: uppercase;
+}
 
 .sunset{ grid-area: 2/4/3/6 }
 .sunrise{ grid-area: 1/4/2/6;}
