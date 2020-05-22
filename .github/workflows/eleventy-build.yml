@@ -1,4 +1,4 @@
-name: Deploy to from Source Master
+name: Rebuild and Deploy to gh-pages
 on:
   push:	
     branches:	
@@ -33,10 +33,10 @@ jobs:
           ${{ runner.os }}-
     - name: npm install and build
       run: |
-        npm install
+        npm ci --no-audit
         npx @11ty/eleventy
 
-    - name: Deploy to Master
+    - name: Deploy to gh-pages
       uses: s0/git-publish-subdir-action@master
       env:
         REPO: self

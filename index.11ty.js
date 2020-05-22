@@ -8,8 +8,6 @@ const zonedDate = utcToZonedTime(date, timeZone)
 
 const moonPath =  require('./lib/moonpath')
 
-console.log(moonPath())
-
 let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
 <span class="day">${format(zonedDate,'d')}</span>
 <span class="dow">${format(zonedDate,'EEEE')}</span>`
