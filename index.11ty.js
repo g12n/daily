@@ -42,7 +42,6 @@ let {parallacticAngle}= SunCalc.getMoonPosition(zonedDate,50.935173, 6.953101)
 
 moonSVG +=`<circle class="moon-shadow" cx="300" cy="300" r="300"/>`
 moonSVG +=`<path class="moon-light" d="${moonPath(fraction,phase,parallacticAngle,300, [300,300])}" />`
-
 moonSVG +=`</svg></div>`
 
 //const rtf = new Intl.RelativeTimeFormat('de');
