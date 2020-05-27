@@ -17,10 +17,15 @@ let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
 <span class="day">${format(zonedDate,'d')}</span>
 <span class="dow">${format(zonedDate,'EEEE')}</span>`
 
+console.log(calendarDate);
+
 let today =zonedDate.toArvelie()
 let arvelieDate = `<span class="y">${today.y}</span>
 <span class="m">${today.m}</span>
-<span class="d">${today.d}</span>`
+<span class="d">${today.d}</span>
+`
+console.log(today);
+console.log(arvelieDate);
 
 let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
 let sunBlock = `<span class="sunrise">${format(utcToZonedTime(times.sunrise,timeZone),'HH:mm')}</span>
