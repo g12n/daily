@@ -3,21 +3,29 @@ const Arvelie =  require('./lib/arvelie')
 const SunCalc = require('suncalc');
 const moonPath =  require('./lib/moonpath')
 
-console.log("start")
-const date = new Date()
-console.log("date:",date)
+
 const timeZone = 'Europe/Berlin'
+const date = new Date()
 const zonedDate = utcToZonedTime(date, timeZone)
 
 
-console.log("zonedDate:", zonedDate)
-console.log("Month:",format(zonedDate,'MMMM'))
+let timeString = (date) =>{
+  let string = "";
+  if (date) {
+    string = format(utcToZonedTime(date, timeZone), 'HH:mm')
+  }
+  return string
+}
+
+
+
+
 
 let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
 <span class="day">${format(zonedDate,'d')}</span>
 <span class="dow">${format(zonedDate,'EEEE')}</span>`
 
-console.log(calendarDate);
+
 
 let today =zonedDate.toArvelie()
 let arvelieDate = `<span class="y">${today.y}</span>
@@ -26,32 +34,37 @@ let arvelieDate = `<span class="y">${today.y}</span>
 `
 
 let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
-let sunrise  = format(utcToZonedTime(times.sunrise,timeZone),'HH:mm');
-let sunset = format(utcToZonedTime(times.sunset,timeZone),'HH:mm');
-
-
+let sunrise  = timeString(times.sunrise);
 console.log("sunrise:", sunrise);
+
+let sunset = timeString(times.sunset);
 console.log("sunset:",sunset);
+
+let moonTimes = SunCalc.getMoonTimes(zonedDate, 50.935173, 6.953101);
+
+let moonrise = timeString(moonTimes.rise)
+console.log("moonrise:",moonrise);
+
+let moonset = timeString(moonTimes.set)
+console.log("moonset:",moonset);
+
+let {alwaysDown, alwaysUp } = moonset;
+
+
+
 
 let sunBlock = `<span class="sunrise">${sunrise}</span>
 <span class="sunset">${sunset}</span>`
 
-
-let {rise:moonrise, set:moonset, alwaysDown, alwaysUp } =  SunCalc.getMoonTimes(zonedDate, 50.935173, 6.953101);
 let moonBlock = ``
-
-console.log("moonrise: ",moonrise);
-console.log("moonset: ",moonset)
-console.log(alwaysDown)
-console.log(alwaysUp)
 
 if (alwaysDown === true){
   moonBlock += `<span class="moon-info">always down</span>`
 } else if (alwaysUp === true){
   moonBlock += `<span class="moon-info">always up</span>`
 } else {
-  moonBlock += `<span class="moonrise">${format(utcToZonedTime(moonrise,timeZone),'HH:mm')}</span>`
-  moonBlock += `<span class="moonset">${format(utcToZonedTime(moonset,timeZone),'HH:mm')}</span>`
+  moonBlock += `<span class="moonrise">${moonrise}</span>`
+  moonBlock += `<span class="moonset">${moonset}</span>`
 }
 
 let moonSVG = `<div class="moon-svg"><svg viewBox="0 0  600 600">`
