@@ -24,15 +24,26 @@ let arvelieDate = `<span class="y">${today.y}</span>
 <span class="m">${today.m}</span>
 <span class="d">${today.d}</span>
 `
-console.log(today);
-console.log(arvelieDate);
 
 let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
-let sunBlock = `<span class="sunrise">${format(utcToZonedTime(times.sunrise,timeZone),'HH:mm')}</span>
-<span class="sunset">${format(utcToZonedTime(times.sunset,timeZone),'HH:mm')}</span>`
+let sunrise  = format(utcToZonedTime(times.sunrise,timeZone),'HH:mm');
+let sunset = format(utcToZonedTime(times.sunset,timeZone),'HH:mm');
+
+
+console.log("sunrise:", sunrise);
+console.log("sunset:",sunset);
+
+let sunBlock = `<span class="sunrise">${sunrise}</span>
+<span class="sunset">${sunset}</span>`
+
 
 let {rise:moonrise, set:moonset, alwaysDown, alwaysUp } =  SunCalc.getMoonTimes(zonedDate, 50.935173, 6.953101);
 let moonBlock = ``
+
+console.log("moonrise: ",moonrise);
+console.log("moonset: ",moonset)
+console.log(alwaysDown)
+console.log(alwaysUp)
 
 if (alwaysDown === true){
   moonBlock += `<span class="moon-info">always down</span>`
