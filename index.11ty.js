@@ -3,9 +3,15 @@ const Arvelie =  require('./lib/arvelie')
 const SunCalc = require('suncalc');
 const moonPath =  require('./lib/moonpath')
 
+console.log("start")
 const date = new Date()
+console.log("date:",date)
 const timeZone = 'Europe/Berlin'
 const zonedDate = utcToZonedTime(date, timeZone)
+
+
+console.log("zonedDate:", zonedDate)
+console.log("Month:",format(zonedDate,'MMMM'))
 
 let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
 <span class="day">${format(zonedDate,'d')}</span>
