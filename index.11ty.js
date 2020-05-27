@@ -1,12 +1,11 @@
 const { zonedTimeToUtc, utcToZonedTime, format } = require('date-fns-tz')
 const Arvelie =  require('./lib/arvelie')
 const SunCalc = require('suncalc');
+const moonPath =  require('./lib/moonpath')
 
 const date = new Date()
 const timeZone = 'Europe/Berlin'
 const zonedDate = utcToZonedTime(date, timeZone)
-
-const moonPath =  require('./lib/moonpath')
 
 let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
 <span class="day">${format(zonedDate,'d')}</span>
