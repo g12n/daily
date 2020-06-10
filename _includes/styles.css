@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-family: 'Quicksand', sans-serif;
     font-size: max(14px, calc(0rem + 3vmin));
     background: hsl(280 20% 10%)

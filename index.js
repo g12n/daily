@@ -30,8 +30,6 @@ let arvelieDate = `<span class="y">${today.y}</span>
 
 let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
 let sunrise  = timeString(times.sunrise);
-console.log("sunrise:", sunrise);
-
 let sunset = timeString(times.sunset);
 let moonTimes = SunCalc.getMoonTimes(zonedDate, 50.935173, 6.953101);
 let moonrise = timeString(moonTimes.rise)
@@ -62,23 +60,22 @@ moonSVG +=`</svg></div>`
 
 let code = `<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${today.toString()}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
-
-  </head>
-  <body>
-    <div class="arvelie">
-      ${arvelieDate}
-      ${calendarDate}
-      ${sunBlock}
-      ${moonBlock}
-      ${moonSVG}
-    </div>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${today.toString()}</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="arvelie">
+${arvelieDate}
+${calendarDate}
+${sunBlock}
+${moonBlock}
+${moonSVG}
+</div>
+</body>
 </html>`
 
 
@@ -87,6 +84,7 @@ var dir = './_site';
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
+
 
 fs.writeFile('_site/index.html',code, function (err) {
   if (err) return console.log(err);
