@@ -5,6 +5,8 @@ const Arvelie =  require('./lib/arvelie')
 const SunCalc = require('suncalc');
 const moonPath =  require('./lib/moonpath')
 
+const CleanCSS = require("clean-css");
+
 const timeZone = 'Europe/Berlin'
 const date = new Date()
 const zonedDate = utcToZonedTime(date, timeZone)
@@ -58,6 +60,14 @@ moonSVG +=`<circle class="moon-shadow" cx="300" cy="300" r="300"/>`
 moonSVG +=`<path class="moon-light" d="${moonPath(fraction,phase,parallacticAngle,300, [300,300])}" />`
 moonSVG +=`</svg></div>`
 
+
+
+
+fs.readFile('_includes/styles.css', (err, css) => {
+
+let result =  new CleanCSS({}).minify(css).styles;
+
+
 let code = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +75,8 @@ let code = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${today.toString()}</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css" />
+<style>${result}</style>
+
 </head>
 <body>
 <div class="arvelie">
@@ -78,7 +89,6 @@ ${moonSVG}
 </body>
 </html>`
 
-
 var dir = './_site';
 
 if (!fs.existsSync(dir)){
@@ -90,3 +100,8 @@ fs.writeFile('_site/index.html',code, function (err) {
   if (err) return console.log(err);
   console.log(`${today} > _site/index.html`);
 });
+
+
+})
+
+
