@@ -18,9 +18,6 @@ let timeString = (date) =>{
 }
 
 
-
-
-
 let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
 <span class="day">${format(zonedDate,'d')}</span>
 <span class="dow">${format(zonedDate,'EEEE')}</span>`
@@ -38,23 +35,13 @@ let sunrise  = timeString(times.sunrise);
 console.log("sunrise:", sunrise);
 
 let sunset = timeString(times.sunset);
-console.log("sunset:",sunset);
-
 let moonTimes = SunCalc.getMoonTimes(zonedDate, 50.935173, 6.953101);
-
 let moonrise = timeString(moonTimes.rise)
-console.log("moonrise:",moonrise);
-
 let moonset = timeString(moonTimes.set)
-console.log("moonset:",moonset);
-
 let {alwaysDown, alwaysUp } = moonset;
 
 
-
-
-let sunBlock = `<span class="sunrise">${sunrise}</span>
-<span class="sunset">${sunset}</span>`
+let sunBlock = `<span class="sunrise">${sunrise}</span><span class="sunset">${sunset}</span>`
 
 let moonBlock = ``
 
@@ -63,15 +50,16 @@ if (alwaysDown === true){
 } else if (alwaysUp === true){
   moonBlock += `<span class="moon-info">always up</span>`
 } else {
-  moonBlock += `<span class="moonrise">${moonrise}</span>`
-  moonBlock += `<span class="moonset">${moonset}</span>`
+  moonBlock += `<span class="moonrise">${moonrise}</span><span class="moonset">${moonset}</span>`
 }
 
-let moonSVG = `<div class="moon-svg"><svg viewBox="0 0  600 600">`
+
 
 let {fraction, phase} = SunCalc.getMoonIllumination(zonedDate)
 let {parallacticAngle}= SunCalc.getMoonPosition(zonedDate,50.935173, 6.953101)
+let moonPathData = moonPath(fraction,phase,parallacticAngle,300, [300,300]);
 
+let moonSVG = `<div class="moon-svg"><svg viewBox="0 0  600 600">`
 moonSVG +=`<circle class="moon-shadow" cx="300" cy="300" r="300"/>`
 moonSVG +=`<path class="moon-light" d="${moonPath(fraction,phase,parallacticAngle,300, [300,300])}" />`
 moonSVG +=`</svg></div>`
