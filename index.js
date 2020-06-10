@@ -25,10 +25,7 @@ let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
 <span class="dow">${format(zonedDate,'EEEE')}</span>`
 
 let today =zonedDate.toArvelie()
-let arvelieDate = `<span class="y">${today.y}</span>
-<span class="m">${today.m}</span>
-<span class="d">${today.d}</span>
-`
+let arvelieDate = `<span class="y">${today.y}</span><span class="m">${today.m}</span><span class="d">${today.d}</span>`
 
 let times = SunCalc.getTimes(zonedDate, 50.935173, 6.953101);
 let sunrise  = timeString(times.sunrise);
@@ -65,7 +62,7 @@ moonSVG +=`</svg></div>`
 
 fs.readFile('_includes/styles.css', (err, css) => {
 
-let result =  new CleanCSS({}).minify(css).styles;
+let styles =  new CleanCSS({}).minify(css).styles;
 
 
 let code = `<!DOCTYPE html>
@@ -75,7 +72,7 @@ let code = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${today.toString()}</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>${result}</style>
+<style>${styles}</style>
 
 </head>
 <body>
