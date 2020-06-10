@@ -6,7 +6,6 @@ on:
   schedule:
     - cron:  '2 22 * * *'
 
-
 jobs:
   deploy:
     name: Checkout and Build
@@ -34,7 +33,7 @@ jobs:
     - name: npm install and build
       run: |
         npm ci --no-audit
-        npx @11ty/eleventy
+        npm run build
 
     - name: Deploy to gh-pages
       uses: s0/git-publish-subdir-action@master

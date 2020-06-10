@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx @11ty/eleventy",
+    "build": "node index.js && node style.js",
     "dev": "npx @11ty/eleventy --serve"
   },
   "repository": {
@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/g12n/daily#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.0",
     "cssnano": "^4.1.10"
   },
   "dependencies": {

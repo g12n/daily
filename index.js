@@ -1,13 +1,13 @@
+fs = require('fs');
+
 const { zonedTimeToUtc, utcToZonedTime, format } = require('date-fns-tz')
 const Arvelie =  require('./lib/arvelie')
 const SunCalc = require('suncalc');
 const moonPath =  require('./lib/moonpath')
 
-
 const timeZone = 'Europe/Berlin'
 const date = new Date()
 const zonedDate = utcToZonedTime(date, timeZone)
-
 
 let timeString = (date) =>{
   let string = "";
@@ -21,8 +21,6 @@ let timeString = (date) =>{
 let calendarDate = `<span class="month">${format(zonedDate,'MMMM')}</span>
 <span class="day">${format(zonedDate,'d')}</span>
 <span class="dow">${format(zonedDate,'EEEE')}</span>`
-
-
 
 let today =zonedDate.toArvelie()
 let arvelieDate = `<span class="y">${today.y}</span>
@@ -53,8 +51,6 @@ if (alwaysDown === true){
   moonBlock += `<span class="moonrise">${moonrise}</span><span class="moonset">${moonset}</span>`
 }
 
-
-
 let {fraction, phase} = SunCalc.getMoonIllumination(zonedDate)
 let {parallacticAngle}= SunCalc.getMoonPosition(zonedDate,50.935173, 6.953101)
 let moonPathData = moonPath(fraction,phase,parallacticAngle,300, [300,300]);
@@ -64,23 +60,7 @@ moonSVG +=`<circle class="moon-shadow" cx="300" cy="300" r="300"/>`
 moonSVG +=`<path class="moon-light" d="${moonPath(fraction,phase,parallacticAngle,300, [300,300])}" />`
 moonSVG +=`</svg></div>`
 
-//const rtf = new Intl.RelativeTimeFormat('de');
-//rtf.format(-3.14, 'days')
-
-class Test {
-  // or `async data() {`
-  // or `get data() {`
-  data() {
-    return {
-      name: "d",
-     // layout: "teds-rad-layout",
-      // … other front matter keys
-    };
-  }
-
-  render({name}) {
-    // will always be "Ted"
-    return `<!DOCTYPE html>
+let code = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -100,7 +80,15 @@ class Test {
     </div>
   </body>
 </html>`
-  }
+
+
+var dir = './_site';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
 }
 
-module.exports = Test;
+fs.writeFile('_site/index.html',code, function (err) {
+  if (err) return console.log(err);
+  console.log(`${today} > _site/index.html`);
+});
