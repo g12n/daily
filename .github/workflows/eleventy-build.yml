@@ -18,6 +18,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 10.x
+    - name: npm install and build
       run: |
         npm ci --no-audit
         npm run build
