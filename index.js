@@ -62,7 +62,13 @@ moonSVG +=`</svg></div>`
 
 fs.readFile('_includes/styles.css', (err, css) => {
 
-let styles =  new CleanCSS({}).minify(css).styles;
+let clean =  new CleanCSS({
+    level: 2
+  }).minify(css)
+
+let styles = clean.styles;
+
+
 
 
 let code = `<!DOCTYPE html>
