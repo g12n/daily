@@ -3,9 +3,15 @@ fs = require('fs');
 const { zonedTimeToUtc, utcToZonedTime, format } = require('date-fns-tz')
 const Arvelie =  require('./lib/arvelie')
 const SunCalc = require('suncalc');
-const moonPath =  require('./lib/moonpath')
+
+const {arc} = require('d3-shape')
+const { wrap } = require('canvas-sketch-util/math');
+
+const {clock, table} = require('./bundle.cjs.js')
 
 const CleanCSS = require("clean-css");
+const { isThursday } = require('date-fns');
+const { time } = require('console');
 
 const timeZone = 'Europe/Berlin'
 const date = new Date()
@@ -50,15 +56,6 @@ if (alwaysDown === true){
 
 let {fraction, phase} = SunCalc.getMoonIllumination(zonedDate)
 let {parallacticAngle}= SunCalc.getMoonPosition(zonedDate,50.935173, 6.953101)
-let moonPathData = moonPath(fraction,phase,parallacticAngle,300, [300,300]);
-
-let moonSVG = `<div class="moon-svg"><svg viewBox="0 0  600 600">`
-moonSVG +=`<circle class="moon-shadow" cx="300" cy="300" r="300"/>`
-moonSVG +=`<path class="moon-light" d="${moonPath(fraction,phase,parallacticAngle,300, [300,300])}" />`
-moonSVG +=`</svg></div>`
-
-
-
 
 fs.readFile('_includes/styles.css', (err, css) => {
 
@@ -69,7 +66,21 @@ let clean =  new CleanCSS({
 let styles = clean.styles;
 
 
+let timeToAngle = (date) =>{
 
+myDate = new Date(date);
+
+let fullDay = 24 * 60 * 60; // Seconds in a Day 
+let time = (myDate.getHours() * 60 * 60) + (myDate.getMinutes() * 60 ) + myDate.getSeconds() // Seconds in Time
+
+let angle = (time / fullDay  ) * 2 * Math.PI - Math.PI;
+
+
+
+console.log(wrap(angle, 0, 2 * Math.PI))
+return wrap(angle, 0, 2 * Math.PI);
+
+}
 
 let code = `<!DOCTYPE html>
 <html lang="en">
@@ -82,13 +93,18 @@ let code = `<!DOCTYPE html>
 
 </head>
 <body>
+
 <div class="arvelie">
 ${arvelieDate}
 ${calendarDate}
 ${sunBlock}
 ${moonBlock}
-${moonSVG}
+<div class="sun-clock"> ${clock()}</div>
+<div class="sun-table"> ${table()}</div>
 </div>
+
+
+
 </body>
 </html>`
 

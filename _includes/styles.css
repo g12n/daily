@@ -3,64 +3,16 @@ body {
     margin: 0;
     font-family: 'Quicksand', sans-serif;
     font-size: max(14px, calc(0rem + 3vmin));
-    background: hsl(280 20% 10%)
+    background: hsl(280 20% 10%);
+    color: #fff;
 }
 
-.arvelie{
-    display: grid;
-    grid-gap: 5vmin;
-    padding:  10vmin;
-    margin: auto auto;
-    justify-content: center;
-    text-align: center;
+
+svg{
     width: 100vmin;
     height: 100vmin;
-    grid-template-rows: repeat(7,1fr);
-    grid-template-columns: repeat(7,1fr);
-    box-sizing: border-box
-  }
-
-
-.arvelie span{
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  border-radius: 1vmin;
-  background-color: hsl(220deg 40% 40% / 0.8);
-  color: #fff; 
 }
 
-
-.y, .m, .d {
-  font-size: 6em;
-  font-weight: 300;
-}
-.y { grid-area: 1/1/4/4 }
-.m { grid-area: 3/3/6/6 }
-.d { grid-area: 5/5/8/8 }
-
-.day { grid-area: 5/1/6/3 }
-.dow { grid-area: 4/1/5/3 }
-.month{ grid-area: 6/1/8/5 ; 
-  font-weight: 500;
-  font-size: 3em; 
-  letter-spacing: 0.05em; 
-  text-transform: uppercase;
-}
-
-.sunset{ grid-area: 2/4/3/6 }
-.sunrise{ grid-area: 1/4/2/6;}
-
-.moonset{ grid-area: 4/6/5/8 }
-.moonrise{grid-area: 3/6/4/8}
-.moon-info{grid-area: 3/6/4/8}
-
-.moon-svg{
-  grid-area:1/6/3/8
-}
-.moon-light{ 
-  fill: #fff;
-}
-.moon-shadow{ 
-  fill: hsl(220deg 40% 40% / 0.8);
+table{
+    width: 100vmin;
 }
